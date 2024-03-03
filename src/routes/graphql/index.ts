@@ -6,7 +6,10 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   graphql,
+  parse,
+  validate,
 } from 'graphql';
+import depthLimit from 'graphql-depth-limit';
 import { createGqlResponseSchema, gqlResponseSchema } from './schemas.js';
 import { MemberTypeId, memberType } from './types/member.js';
 import { ChangePostInput, CreatePostInput, postType } from './types/post.js';
@@ -187,6 +190,9 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
       });
 
       const schema = new GraphQLSchema({ query, mutation });
+
+      const validationErrors = validate(schema, parse(req.body.query), [depthLimit(5)]);
+      if (validationErrors.length > 0) return { errors: validationErrors };
 
       const res = await graphql({
         schema,
