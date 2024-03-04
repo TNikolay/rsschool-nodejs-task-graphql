@@ -18,3 +18,40 @@ export const createGqlResponseSchema = {
     },
   ),
 };
+
+// const rootQuery = new GraphQLObjectType({
+//   name: 'Query',
+//   fields: {
+//     memberTypes: {
+//       type: GraphQLInt,
+//       resolve: async () => {
+//         try {
+//           return 42;
+//         } catch (err) {
+//           //return new Error(err.message);
+//           return new Error('EEEEEEEE');
+//         }
+//       },
+//     },
+//     // artist: {
+//     //   type: artistType,
+//     //   args: {
+//     //     id: {
+//     //       type: new GraphQLNonNull(GraphQLID),
+//     //     },
+//     //   },
+//     //   resolve: async (_, args) => {
+//     //     try {
+//     //       return await Artists.findById(args.id);
+//     //     } catch (err) {
+//     //       return new Error(err.message);
+//     //     }
+//     //   },
+//     // },
+//   },
+// });
+
+// export const gqlSchema = new GraphQLSchema({
+//   query: rootQuery,
+//   //  mutation: rootMutation,
+// });
